@@ -30,7 +30,7 @@
     <button
       (click)="toggleExpanded()"
       class="duration-200"
-      [class.rotate-180]="isExpanded"
+      [class.rotate-180]="isExpanded()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -48,11 +48,13 @@
       </svg>
     </button>
   </dl>
-  <section class="my-4" *ngIf="isReplying">
+  <section class="my-4" *ngIf="isReplying()">
     <app-comment-form></app-comment-form>
   </section>
-  <section class="nested-comments" *ngIf="isExpanded">
-    <app-comment></app-comment>
-    <app-comment></app-comment>
+  <section class="my-4 nested-comments" *ngIf="isExpanded()">
+    <app-comment
+      [comment]="nestedComment"
+      *ngFor="let nestedComment of nestedComments()"
+    ></app-comment>
   </section>
 </article>
